@@ -42,7 +42,7 @@
 	/* Set wedge height to prevent gaps */
 	--wedge-height: 3.493vw; /* Computed with width * sin(angle) / sin(90 - angle) */
 	/* Prevent wedge margin from getting too extreme with computed vw */
-	--wedge-margin: min(2.6rem, var(--wedge-height)); /* 2.6 computed via content width & wedge height */
+	--wedge-margin: min(2.6rem, var(--wedge-height)); /* 1.9 computed via content width & wedge height */
 	--wedge-text-size: 1.375rem;
 	--clr-wedge-text: #222;
 	--clr-wedge-link: #666;
@@ -96,6 +96,7 @@
 	--pad-content: max(2em, calc((100vw - var(--width-content)) / 2 + 2em));
 	--clr-feature-text: #eee;
 	--clr-faded-text: #eeea;
+	--clr-faded-text-alt: #000a;
 	--clr-quote: #888;
 
 	/* Links & buttons */
@@ -116,6 +117,7 @@
 	--transition-duration: 300ms;
 	--transition-duration-btn: 100ms;
 	--transition-duration-link: 300ms;
+	--wedge-transition-deviation: 0.8;
 }
 
 /*
@@ -188,10 +190,86 @@ blockquote {
 	right: 50%;
 	z-index: 5;
 	margin: 0 -50vw;
-	padding: 0 var(--pad-content) 2em;
+	padding: 0 var(--pad-content);
 	flex: 1;
+
+	/* Wedges */
+	&::before {
+		content: '';
+		display: block;
+		position: relative;
+		background: inherit;
+		margin-inline: calc(-1 * max(2em, ((100vw - var(--width-content)) / 2 + 2em)));
+		height: var(--wedge-height);
+		z-index: -1;
+		box-shadow: 0 0 var(--shadow-spread) var(--clr-shadow);
+		clip-path: inset(calc(-1 * var(--shadow-spread)) 0 0 0);
+		border-top: var(--border-content);
+		background-blend-mode: multiply;
+	}
+
+	&.left::before {
+		transform-origin: bottom right;
+		transform: skewY(var(--wedge-angle));
+	}
+	&.right::before {
+		transform-origin: bottom left;
+		transform: skewY(calc(-1 * var(--wedge-angle)));
+	}
 }
 
+footer {
+	text-align: center;
+	background: var(--clr-wedge);
+	font-size: 0.75em;
+	color: var(--clr-faded-text-alt);
+	position: relative;
+	width: 100vw;
+	left: 50%;
+	right: 50%;
+	/* Margin normally --wedge-margin. Since the angle is provided on the footer via
+	the ::before pseudo class, and the pseudoelement sticks out past the footer itself,
+	the extra overlap needs to be added. This extra margin needed is half of the height
+	of the pseudoelement (--wedge-height), since the midpoint of it is on the edge of
+	the footer, effectively cutting that height in half. */
+	margin: calc(var(--wedge-margin) + var(--wedge-height) / 2) -50vw 0;
+	padding: 0 max(2em, calc((100vw - var(--width-content)) / 2 + 2em)) 2em;
+
+	&::before {
+		content: '';
+		display: block;
+		position: relative;
+		background: inherit;
+		margin-inline: calc(-1 * max(2em, ((100vw - var(--width-content)) / 2 + 2em)));
+		/* Chromium browsers leave an ugly edge on the bottom of the pseudoelement where the
+		shadow would be. Fix is to add a few pixels to the height, and then clip that off of
+		the bottom to remove the ugly edge caused by the bad antialiasing of the shadow. */
+		height: calc(var(--wedge-height) + 5px);
+		z-index: -1;
+		box-shadow: 0 0 var(--shadow-spread) var(--clr-shadow);
+		clip-path: inset(calc(-1 * var(--shadow-spread)) 0 5px 0);
+		-webkit-backface-visibility: hidden;
+		transition: transform var(--transition-duration) var(--transition-curve);
+	}
+	&.left {
+		&::before {
+		transform-origin: bottom right;
+		transform: skewY(var(--wedge-angle));
+		}
+		&:hover::before {
+			transform: skewY(calc(var(--wedge-transition-deviation) * var(--wedge-angle)));
+		}
+	}
+	&.right {
+		&::before {
+			transform-origin: bottom left;
+			transform: skewY(calc(-1 * var(--wedge-angle)));
+		}
+		&:hover::before {
+			transform: skewY(calc(-1 * var(--wedge-transition-deviation) * var(--wedge-angle)));
+		}
+	}
+}
 .wedge a,
 footer a {
 	color: var(--clr-wedge-link);
@@ -259,13 +337,6 @@ footer a::after {
 			}
 		}
 	}
-}
-
-footer {
-	text-align: center;
-	font-size: 0.75em;
-	color: var(--clr-faded-text);
-	padding-top: 1em;
 }
 
 span.arrow {

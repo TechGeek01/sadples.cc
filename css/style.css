@@ -44,6 +44,9 @@
 	/* Prevent wedge margin from getting too extreme with computed vw */
 	--wedge-margin: min(2.6rem, var(--wedge-height)); /* 2.6 computed via content width & wedge height */
 	--wedge-text-size: 1.375rem;
+	--clr-wedge-text: #222;
+	--clr-wedge-link: #666;
+	--clr-wedge-link-active: var(--clr-bg1);
 
 	/* Navigation */
 	--pad-block-nav: 1rem;
@@ -176,7 +179,6 @@ blockquote {
 }
 
 .content {
-	/*--clr-bg: red;*/
 	background: url(../assets/img/noise.svg) repeat, linear-gradient(var(--clr-bg));
 	background-blend-mode: multiply;
 	color: var(--clr-text);
@@ -188,28 +190,74 @@ blockquote {
 	margin: 0 -50vw;
 	padding: 0 var(--pad-content) 2em;
 	flex: 1;
+}
 
-	/* Wedges */
-	&::before {
-		content: '';
-		display: block;
-		position: relative;
-		background: inherit;
-		margin-inline: calc(-1 * max(2em, ((100vw - var(--width-content)) / 2 + 2em)));
-		height: var(--wedge-height);
-		z-index: -1;
-		box-shadow: 0 0 var(--shadow-spread) var(--clr-shadow);
-		clip-path: inset(calc(-1 * var(--shadow-spread)) 0 0 0);
-		border-top: var(--border-content);
-		background-blend-mode: multiply;
+.wedge a,
+footer a {
+	color: var(--clr-wedge-link);
+}
+.wedge a:focus,
+.wedge a:hover,
+footer a:focus,
+footer a:hover {
+	color: var(--clr-wedge-link-active);
+}
+.wedge a::after,
+footer a::after {
+	background: var(--clr-wedge-link-active);
+}
+
+.wedge {
+	background: var(--clr-wedge);
+	position: relative;
+	width: 100vw;
+	left: 50%;
+	right: 50%;
+	margin: var(--wedge-margin) -50vw;
+	padding: calc(var(--wedge-height) + 1em) max(2em, calc((100vw - var(--width-content)) / 2 + 2em));
+	font-size: var(--wedge-text-size);
+	color: var(--clr-wedge-text);
+	box-shadow: 0 0 var(--shadow-spread) var(--clr-shadow);
+	z-index: 5;
+
+	@media screen and (min-width: 651px) {
+		scroll-margin-top: calc(var(--size-text) + 2 * var(--pad-block-nav));
 	}
-	&.left::before {
-		transform-origin: bottom right;
-		transform: skewY(var(--wedge-angle));
+
+	&, > div {
+		transition: transform var(--transition-duration) var(--transition-curve);
 	}
-	&.right::before {
-		transform-origin: bottom left;
-		transform: skewY(calc(-1 * var(--wedge-angle)));
+
+	&.left {
+		transform: skew(var(--wedge-angle)) rotate(var(--wedge-angle));
+
+		> div {
+			transform: rotate(calc(-1 * var(--wedge-angle))) skew(calc(-1 * var(--wedge-angle)));
+		}
+
+		&:hover {
+			transform: skew(calc(var(--wedge-transition-deviation) * var(--wedge-angle))) rotate(calc(var(--wedge-transition-deviation) * var(--wedge-angle)));
+			
+			> div {
+				transform: rotate(calc(-1 * var(--wedge-transition-deviation) * var(--wedge-angle))) skew(calc(-1 * var(--wedge-transition-deviation) * var(--wedge-angle)));
+			}
+		}
+	}
+	&.right {
+		text-align: right;
+		transform: skew(calc(-1 * var(--wedge-angle))) rotate(calc(-1 * var(--wedge-angle)));
+
+		> div {
+			transform: rotate(var(--wedge-angle)) skew(var(--wedge-angle));
+		}
+
+		&:hover {
+			transform: skew(calc(-1 * var(--wedge-transition-deviation) * var(--wedge-angle))) rotate(calc(-1 * var(--wedge-transition-deviation) * var(--wedge-angle)));
+
+			> div {
+				transform: skew(calc(var(--wedge-transition-deviation) * var(--wedge-angle))) rotate(calc(var(--wedge-transition-deviation) * var(--wedge-angle)));
+			}
+		}
 	}
 }
 

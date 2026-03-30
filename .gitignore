@@ -8,3 +8,10 @@ scratch
 # Asset creation
 *.ai
 *.psd
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example

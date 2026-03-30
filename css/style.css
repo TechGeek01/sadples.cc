@@ -349,7 +349,7 @@ a.btn {
 			content: "" attr(data-type);
 		}
 		&:after {
-			content: "v" attr(data-version);
+			content: "" attr(data-version);
 			text-transform: none;
 		}
 	}

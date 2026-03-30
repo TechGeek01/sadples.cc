@@ -1,0 +1,29 @@
+{
+  "name": "Sadples",
+  "short_name": "Sadples",
+  "theme_color": "#323230",
+  "background_color": "#282824",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/?source=pwa",
+  "description": "Sadples",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icon-mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

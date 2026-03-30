@@ -1,0 +1,14 @@
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: GPTbot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: nsa
+Disallow: /
+
+Sitemap: https://sadples.cc/sitemap.xml
+Sitemap: https://www.sadples.cc/sitemap.xml

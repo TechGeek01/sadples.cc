@@ -1,0 +1,10 @@
+# Scratch directory
+scratch
+
+# Scripts
+*.bat
+*.ps1
+
+# Asset creation
+*.ai
+*.psd

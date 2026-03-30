@@ -171,6 +171,10 @@ blockquote {
 	}
 }
 
+.nowrap {
+	wrap: nowrap;
+}
+
 .content {
 	/*--clr-bg: red;*/
 	background: url(../assets/img/noise.svg) repeat, linear-gradient(var(--clr-bg));
@@ -339,6 +343,8 @@ a.btn {
 	&.file {
 		display: flex;
 		flex-direction: column;
+		text-align: center;
+		min-width: 0;
 		line-height: 1.25;
 
 		&:before, &:after {
@@ -346,10 +352,10 @@ a.btn {
 			font-size: 0.75em;
 		}
 		&:before {
-			content: "" attr(data-type);
+			content: attr(data-type);
 		}
 		&:after {
-			content: "" attr(data-version);
+			content: attr(data-version);
 			text-transform: none;
 		}
 	}

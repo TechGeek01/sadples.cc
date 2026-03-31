@@ -27,6 +27,8 @@
 	--clr-text: light-dark(#000, #eee);
 	--clr-bg: light-dark(#eee, #22221c);
 	--clr-border: light-dark(#ddd, #282824);
+	--clr-wedge-text: light-dark(#eee, #22221c);
+	--clr-wedge-bg: light-dark(#282824, #eee);
 	--clr-hex: #161613;
 
 	/* Layout - Accents */
@@ -37,16 +39,12 @@
 	--shadow-spread: 3em;
 
 	/* Layout - Wedges */
-	--clr-wedge: #eee;
 	--wedge-angle: 2deg;
 	/* Set wedge height to prevent gaps */
 	--wedge-height: calc(var(--width-content) * tan(var(--wedge-angle))); /* Computed with width * sin(angle) / sin(90 - angle) */
 	/* Prevent wedge margin from getting too extreme with computed vw */
 	--wedge-margin: clamp(2rem, var(--wedge-height), 3.2rem);
 	--wedge-text-size: 1.375rem;
-	--clr-wedge-text: #222;
-	--clr-wedge-link: #666;
-	--clr-wedge-link-active: var(--clr-bg1);
 
 	/* Navigation */
 	--pad-block-nav: 1rem;
@@ -182,7 +180,7 @@ blockquote {
 
 .content {
 	background: url(../assets/img/noise.svg) repeat, linear-gradient(var(--clr-bg));
-	background-blend-mode: multiply;
+	background-blend-mode: overlay;
 	color: var(--clr-text);
 	position: relative;
 	width: 100dvw;
@@ -218,11 +216,11 @@ blockquote {
 	}
 }
 
-footer {
+.content footer {
 	text-align: center;
-	background: var(--clr-wedge);
+	background: var(--clr-wedge-bg);
 	font-size: 0.75em;
-	color: var(--clr-faded-text-alt);
+	color: #888;
 	position: relative;
 	width: 100vw;
 	left: 50%;
@@ -286,7 +284,7 @@ footer a::after {
 }
 
 .wedge {
-	background: var(--clr-wedge);
+	background: var(--clr-wedge-bg);
 	position: relative;
 	width: 100vw;
 	left: 50%;

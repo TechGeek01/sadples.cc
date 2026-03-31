@@ -40,9 +40,9 @@
 	--clr-wedge: #eee;
 	--wedge-angle: 2deg;
 	/* Set wedge height to prevent gaps */
-	--wedge-height: 3.493vw; /* Computed with width * sin(angle) / sin(90 - angle) */
+	--wedge-height: calc(var(--width-content) * tan(var(--wedge-angle))); /* Computed with width * sin(angle) / sin(90 - angle) */
 	/* Prevent wedge margin from getting too extreme with computed vw */
-	--wedge-margin: min(2.6rem, var(--wedge-height)); /* 1.9 computed via content width & wedge height */
+	--wedge-margin: clamp(2rem, var(--wedge-height), 3.2rem);
 	--wedge-text-size: 1.375rem;
 	--clr-wedge-text: #222;
 	--clr-wedge-link: #666;

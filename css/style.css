@@ -180,7 +180,7 @@ blockquote {
 
 .content {
 	background: url(../assets/img/noise.svg) repeat, linear-gradient(var(--clr-bg));
-	background-blend-mode: overlay;
+	background-blend-mode: multiply;
 	color: var(--clr-text);
 	position: relative;
 	width: 100dvw;
@@ -270,17 +270,14 @@ blockquote {
 }
 .wedge a,
 footer a {
-	color: var(--clr-wedge-link);
-}
-.wedge a:focus,
-.wedge a:hover,
-footer a:focus,
-footer a:hover {
-	color: var(--clr-wedge-link-active);
-}
-.wedge a::after,
-footer a::after {
-	background: var(--clr-wedge-link-active);
+	color: var(--clr-link);
+
+	&:focus, &:hover {
+		color: var(--clr-link-active);
+	}
+	&::after {
+		background: var(--clr-link-active);
+	}
 }
 
 .wedge {
@@ -464,14 +461,14 @@ a.btn {
 		min-width: 0;
 		line-height: 1.25;
 
-		&:before, &:after {
+		&::before, &::after {
 			color: var(--clr-faded-text);
 			font-size: 0.75em;
 		}
-		&:before {
+		&::before {
 			content: attr(data-type);
 		}
-		&:after {
+		&::after {
 			content: attr(data-version);
 			text-transform: none;
 		}
@@ -536,14 +533,15 @@ a.btn {
 	background-size: 50% 50%;
 	background-repeat: no-repeat;
 	position: relative;
-}
-.loader:after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: inherit;
-	opacity: 0.4;
-	animation: l3 1s infinite;
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: inherit;
+		opacity: 0.4;
+		animation: l3 1s infinite;
+	}
 }
 @keyframes l3 {
 	to {transform:scale(1.8);opacity:0}
@@ -618,14 +616,14 @@ menu {
 		width: var(--size-menu-hamburger-width);
 		position: relative;
 
-		&:before {
+		&::before {
 			top: var(--size-menu-hamburger-spacing);
 		}
-		&:after {
+		&::after {
 			top: calc(-1 * var(--size-menu-hamburger-spacing));
 		}
-		&:before,
-		&:after {
+		&::before,
+		&::after {
 			background: var(--clr-text);
 			display: block;
 			width: 100%;

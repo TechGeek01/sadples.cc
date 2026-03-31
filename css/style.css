@@ -184,7 +184,8 @@ section.buttons {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.75em;
+	justify-content: center;
+	gap: 2em;
 }
 section.card + section.card {
 	margin-top: 0;

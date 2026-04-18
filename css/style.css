@@ -189,7 +189,7 @@ section.card {
 section.buttons {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	gap: 2em;
 }

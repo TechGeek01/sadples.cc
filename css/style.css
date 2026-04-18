@@ -15,6 +15,7 @@
 	--clr-brand-white: #eee;
 
 	--clr-gold: #ffdc00;
+	--clr-green: #53b100;
 	--clr-charcoal: #242222;
 
 	--clr-transparent-black: #0006;
@@ -503,16 +504,23 @@ a.btn {
 			margin-top: calc(var(--tag-font-size) + 2 * var(--tag-margin-vertical));
 		}
 		.tag {
+			--tag-bg: var(--clr-button-tag);
+			--tag-text: var(--clr-button-tag-text);
+
 			display: block;
 			position: absolute;
-			background: var(--clr-button-tag);
-			color: var(--clr-button-tag-text);
+			background: var(--tag-bg);
+			color: var(--tag-text);
 			font-size: var(--tag-font-size);
 			padding: var(--tag-margin-vertical) var(--tag-margin-horizontal);
 			bottom: 100%;
 			z-index: -1;
 			border-radius: 0.2em 0.2em 0 0;
 			box-shadow: var(--btn-shadow);
+
+			&.green {
+				--tag-bg: var(--clr-green);
+			}
 		}
 	}
 

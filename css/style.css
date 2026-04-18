@@ -14,6 +14,9 @@
 	--clr-brand-red: #cc0000;
 	--clr-brand-white: #eee;
 
+	--clr-gold: #ffdc00;
+	--clr-charcoal: #242222;
+
 	--clr-transparent-black: #0006;
 	--clr-slightly-transparent-black: #0009;
 
@@ -109,6 +112,8 @@
 	--clr-button-dark-hover: #4d4d4a;
 	--clr-button-coffee: #ffdd00;
 	--clr-button-coffee-hover: #ffea00;
+	--clr-button-tag: var(--clr-gold);
+	--clr-button-tag-text: var(--clr-charcoal);
 
 	/* Animations */
 	--transition-curve-default: ease-in-out;
@@ -196,7 +201,7 @@ section.card + section.card {
 	wrap: nowrap;
 }
 
-.content {
+#wrapper > .content {
 	background: url(../assets/img/noise.svg) repeat, linear-gradient(var(--clr-bg));
 	background-blend-mode: multiply;
 	color: var(--clr-text);
@@ -410,7 +415,8 @@ a:not(.btn), menu nav details > summary {
 
 /* Link buttons */
 a.btn {
-	box-shadow: 0 0 0.5rem var(--clr-shadow);
+	--btn-shadow: 0 0 0.5rem var(--clr-shadow);
+	box-shadow: var(--btn-shadow);
 	transition-property: background, filter, top, left, box-shadow;
 	transition-duration: var(--transition-duration-btn);
 	transition-timing-function: var(--transition-curve-default);
@@ -467,6 +473,13 @@ a.btn {
 
 	/* File buttons */
 	&.file {
+		--file-type: attr(data-type);
+		--file-version: attr(data-version);
+
+		--tag-font-size: 0.7em;
+		--tag-margin-vertical: 0.3em;
+		--tag-margin-horizontal: 0.6em;
+
 		display: flex;
 		flex-direction: column;
 		text-align: center;
@@ -483,6 +496,23 @@ a.btn {
 		&::after {
 			content: attr(data-version);
 			text-transform: none;
+		}
+
+		&:has(.tag) {
+			position: relative;
+			margin-top: calc(var(--tag-font-size) + 2 * var(--tag-margin-vertical));
+		}
+		.tag {
+			display: block;
+			position: absolute;
+			background: var(--clr-button-tag);
+			color: var(--clr-button-tag-text);
+			font-size: var(--tag-font-size);
+			padding: var(--tag-margin-vertical) var(--tag-margin-horizontal);
+			bottom: 100%;
+			z-index: -1;
+			border-radius: 0.2em 0.2em 0 0;
+			box-shadow: var(--btn-shadow);
 		}
 	}
 

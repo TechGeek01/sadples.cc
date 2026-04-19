@@ -14,9 +14,11 @@
 	--clr-brand-red: #cc0000;
 	--clr-brand-white: #eee;
 
+	--clr-blue: #00a8c4;
 	--clr-gold: #ffdc00;
 	--clr-green: #53b100;
 	--clr-charcoal: #242222;
+	--clr-white: #eee;
 
 	--clr-transparent-black: #0006;
 	--clr-slightly-transparent-black: #0009;
@@ -518,6 +520,9 @@ a.btn {
 			border-radius: 0.2em 0.2em 0 0;
 			box-shadow: var(--btn-shadow);
 
+			&.blue {
+				--tag-bg: var(--clr-blue);
+			}
 			&.green {
 				--tag-bg: var(--clr-green);
 			}

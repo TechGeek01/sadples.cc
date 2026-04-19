@@ -193,8 +193,11 @@ section.buttons {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	justify-content: center;
 	gap: 2em;
+
+	&.center {
+		justify-content: center;
+	}
 }
 section.card + section.card {
 	margin-top: 0;

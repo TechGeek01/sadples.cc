@@ -387,7 +387,7 @@ a {
 }
 
 /* Text links */
-a:not(.btn), menu nav details > summary {
+a:not(.btn):not(.swatch), menu nav details > summary {
 	display: inline-block;
 	position: relative;
 	padding-bottom: 0.2em;
@@ -1254,6 +1254,40 @@ section.lyrics {
 			color: var(--clr-faded-text);
 			display: block;
 		}
+	}
+}
+
+/*
+ * Color swatches
+ */
+
+.swatch {
+	--clr-text: contrast-color(var(--color));
+	--clr-border: rgb(from var(--clr-text) r g b / 0.15);
+
+	display: inline-block;
+	font-family: "Fira Code", monospace;
+	width: 8em;
+	height: 8em;
+	border-radius: 100%;
+	border: 0.75em solid var(--clr-border);
+	background: var(--color);
+	box-shadow: 0 0 0 0.5em #fff1; /* TODO: Make this color adapt to background */
+	color: var(--clr-text);
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: border-width var(--transition-duration-link) var(--transition-curve);
+
+	&::before {
+		content: "#";
+		color: rgb(from var(--clr-text) r g b / 0.6);
+		padding-right: 0.25em;
+	}
+
+	&:focus, &:hover {
+		border-width: 0;
 	}
 }
 
